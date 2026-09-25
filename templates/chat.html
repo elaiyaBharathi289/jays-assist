@@ -1,0 +1,135 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#11121b">
+  <title>Jays Assist</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body class="chat-page">
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-top">
+        <div class="sidebar-brand">
+          <div class="brand-mark small">J</div>
+          <div><strong>Jays Assist</strong><span>AI workspace</span></div>
+        </div>
+        <button class="icon-btn sidebar-close d-lg-none" id="closeSidebar" aria-label="Close sidebar">×</button>
+      </div>
+
+      <button class="new-chat-btn" id="newChatBtn">
+        <span class="plus-icon">+</span><span>New Chat</span>
+      </button>
+
+      <nav class="sidebar-nav" aria-label="Main navigation">
+        <button class="nav-item active" type="button" id="historyNav">
+          <span class="nav-icon">◷</span><span>Chat History</span>
+        </button>
+        <button class="nav-item" type="button" id="settingsNav">
+          <span class="nav-icon">⚙</span><span>Settings</span>
+        </button>
+      </nav>
+
+      <div class="history-section">
+        <div class="section-label">RECENT</div>
+        <div id="threadList" class="thread-list"></div>
+        <div id="emptyThreads" class="empty-threads">Your conversations will appear here.</div>
+      </div>
+
+      <div class="sidebar-bottom">
+        <div class="profile-card" id="profileMenuButton" role="button" tabindex="0">
+          <div class="avatar" id="profileAvatar">EB</div>
+          <div class="profile-copy">
+            <strong id="profileName">Elaiya Bharathi</strong>
+            <span id="profileEmail">Local preview</span>
+          </div>
+          <span class="profile-more">⋯</span>
+        </div>
+        <div class="profile-menu d-none" id="profileMenu">
+          <button type="button" id="profileSettingsBtn">Profile / Settings</button>
+          <button type="button" id="logoutBtn">Log out</button>
+        </div>
+      </div>
+    </aside>
+
+    <div class="sidebar-overlay d-lg-none" id="sidebarOverlay"></div>
+
+    <main class="main-panel">
+      <header class="topbar">
+        <button class="icon-btn menu-btn d-lg-none" id="openSidebar" aria-label="Open sidebar">☰</button>
+        <div class="conversation-title-wrap">
+          <span class="live-dot"></span>
+          <div>
+            <span class="topbar-label">CONVERSATION</span>
+            <h2 id="conversationTitle">New conversation</h2>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <button class="model-pill" type="button" id="modelButton">Jays AI <span>⌄</span></button>
+        </div>
+      </header>
+
+      <section class="chat-content" id="chatContent">
+        <div class="welcome-state" id="welcomeState">
+          <div class="welcome-orbit">
+            <div class="welcome-logo">J</div>
+          </div>
+          <p class="eyebrow">JAYS ASSIST</p>
+          <h1>What would you like to work on?</h1>
+          <p class="welcome-copy">Ask a question, explore an idea, or get help turning a rough thought into something useful.</p>
+          <div class="welcome-hint">
+            <span class="hint-dot"></span>
+            <span>Ask anything and start a conversation.</span>
+          </div>
+        </div>
+
+        <div class="message-list d-none" id="messageList"></div>
+      </section>
+
+      <footer class="composer-area">
+        <div class="composer-shell" id="composerShell">
+          <textarea id="messageInput" rows="1" maxlength="10000" placeholder="Message Jays Assist..." aria-label="Message Jays Assist"></textarea>
+          <div class="composer-toolbar">
+            <div class="composer-tools">
+              <button class="tool-btn" type="button" id="attachmentBtn"><span>⌕</span> Attachment</button>
+              <button class="tool-btn" type="button" id="searchBtn"><span>⌁</span> Search</button>
+              <input type="file" id="attachmentInput" class="d-none" multiple>
+            </div>
+            <button class="send-btn" type="button" id="sendBtn" aria-label="Send message">↑</button>
+          </div>
+        </div>
+        <p class="composer-note">Jays Assist can make mistakes. Check important information.</p>
+      </footer>
+    </main>
+  </div>
+
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="appToast" class="toast app-toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-body" id="toastBody"></div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="settingsModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content settings-modal">
+        <div class="modal-header border-0">
+          <div><p class="eyebrow mb-1">ACCOUNT</p><h5 class="modal-title">Settings</h5></div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="settings-row"><div><strong>Profile</strong><span>Manage your account details.</span></div><span>›</span></div>
+          <div class="settings-row"><div><strong>Appearance</strong><span>Jays Assist uses its dark workspace theme.</span></div><span>Dark</span></div>
+          <div class="settings-row"><div><strong>Conversation history</strong><span>Your saved threads stay available in the sidebar.</span></div><span>On</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{% static 'js/api.js' %}"></script>
+  <script src="{% static 'js/chat.js' %}"></script>
+</body>
+</html>
