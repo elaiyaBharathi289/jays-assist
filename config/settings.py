@@ -33,6 +33,11 @@ DEBUG = env_bool(
     True,
 )
 
+
+# --------------------------------------------------
+# Allowed hosts
+# --------------------------------------------------
+
 ALLOWED_HOSTS = [
     host.strip()
     for host in os.getenv(
@@ -41,6 +46,13 @@ ALLOWED_HOSTS = [
     ).split(",")
     if host.strip()
 ]
+
+# Render automatically provides the public hostname
+# through RENDER_EXTERNAL_HOSTNAME.
+render_hostname = os.getenv("RENDER_EXTERNAL_HOSTNAME")
+
+if render_hostname:
+    ALLOWED_HOSTS.append(render_hostname)
 
 
 # --------------------------------------------------
@@ -223,9 +235,15 @@ REST_FRAMEWORK = {
 # Groq
 # --------------------------------------------------
 
-GROQ_API_KEY = os.getenv("GROQ_API_KEY", "").strip()
+GROQ_API_KEY = os.getenv(
+    "GROQ_API_KEY",
+    "",
+).strip()
 
-GROQ_MODEL = os.getenv("GROQ_MODEL", "").strip()
+GROQ_MODEL = os.getenv(
+    "GROQ_MODEL",
+    "",
+).strip()
 
 
 # --------------------------------------------------
